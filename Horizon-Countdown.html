@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.cruisehive.com/wp-content/uploads/2024/05/arubacruise2.jpg'); /* Replace with your custom image URL */
+            background-size: 100% auto; /* Adjusts the width to 100% and height to auto */
+            background-size: cover;
+			background-position: 35% center; /* Adjusts the position to 25% from the left */
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* For portrait images, ensure they fit vertically */
+        @media (orientation: portrait) {
+            body {
+                background-size: auto 100%; /* Adjusts the height to 100% and width to auto */
+            }
+        }
+
+        .countdown-container {
+            position: absolute; /* Position at the top */
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 5px 10px; /* Reduced padding */
+            border-radius: 5px; /* Smaller border radius */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Smaller box shadow */
+            font-size: 16px; /* Smaller font size */
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Ensure elements wrap on smaller screens */
+        }
+
+        .countdown-element {
+            margin: 0 5px; /* Reduced margin */
+        }
+
+        .countdown-element h2 {
+            font-size: 18px; /* Smaller font size */
+            margin-bottom: 5px;
+        }
+
+        #expired {
+            display: none;
+            font-size: 18px; /* Smaller font size */
+            margin-top: 5px;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .countdown-element {
+                margin: 2px 0;
+            }
+            .countdown-element h2 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1 style="font-size: 16px; margin-bottom: 5px;">Carnival Horizon - ABC Islands</h1>
+        <div class="countdown">
+            <div class="countdown-element">
+                <h2 id="days"></h2>
+                <p>Days</p>
+            </div>
+            <div class="countdown-element">
+                <h2 id="hours"></h2>
+                <p>Hours</p>
+            </div>
+            <div class="countdown-element">
+                <h2 id="minutes"></h2>
+                <p>Minutes</p>
+            </div>
+        </div>
+        <p id="expired">EXPIRED</p>
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("May 10, 2025 7:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Display the result in the element with id="demo"
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector('.countdown').style.display = 'none';
+                document.getElementById("expired").style.display = 'block';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
