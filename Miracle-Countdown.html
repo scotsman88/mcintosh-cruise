@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+		
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Clock</title>
@@ -11,7 +13,7 @@
             font-family: Arial, sans-serif;
         }
 		.bg {
-		background-image: url('https://www.pocruises.com/content/dam/po/inventory-assets/ports/MYK/MYK.jpg');
+		background-image: url("./backgrounds/background2.jpg");
 		height: 100vh;
 		width: 100%;
 		background-position: center;
@@ -41,13 +43,14 @@
     </style>
 </head>
 <body>
+	
     <div class="bg">
         <div class="countdown-box">
             <h2>COUNTDOWN</h2>
             <div id="timer"></div>
         </div>
     </div>
-
+	
     <script>
         function updateCountdown() {
             const targetDate = new Date("September 5, 2025 12:00:00").getTime();
