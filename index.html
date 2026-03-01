@@ -3,257 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>March 2026: Complete Itinerary</title>
+    <title>Christine & Daryl to Australia/New Zealand</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        /* --- 1. GLOBAL RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #2c3e50;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            padding-bottom: 40px;
         }
-        .header-container {
-            width: 100%;
-            margin-bottom: 20px;
+
+        /* --- 2. HEADER & HERO IMAGE --- */
+        header {
+            background: linear-gradient(135deg, #003580 0%, #0056b3 100%);
+            color: white;
+            padding: 30px 20px 80px 20px; /* Space for countdown overlap */
+            text-align: center;
         }
-        .ship-image {
+
+        .hero-container {
+            max-width: 500px;
+            margin: 0 auto 15px auto;
+        }
+
+        .hero-img {
             width: 100%;
             height: auto;
-            display: block;
-            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .header-text {
+
+        header h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        header p { font-weight: 300; opacity: 0.9; }
+
+        /* --- 3. COUNTDOWN CARD --- */
+        .countdown-wrap {
+            max-width: 400px;
+            margin: -50px auto 30px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .countdown-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
             text-align: center;
-            padding: 10px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
-        .section {
-            background-color: #ecf0f1;
-            padding: 15px;
+
+        #timer { display: flex; justify-content: space-around; }
+        .time-num { display: block; font-size: 2rem; font-weight: 700; color: #e67e22; line-height: 1; }
+        .label { font-size: 0.6rem; color: #95a5a6; text-transform: uppercase; font-weight: 600; }
+
+        /* --- 4. CONTENT LAYOUT --- */
+        .container { width: 92%; max-width: 600px; margin: 0 auto; }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
-            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
+
+        h2 { font-size: 1.1rem; color: #003580; margin-bottom: 15px; border-left: 4px solid #e67e22; padding-left: 10px; }
+
+        /* --- 5. BUTTON STACK --- */
+        .btn-stack { display: flex; flex-direction: column; gap: 10px; }
+        .btn {
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            background: #f8f9fa;
+            color: #0056b3;
+            border: 1px solid #dee2e6;
+            transition: 0.2s;
         }
-		
-        th, td {
-            border: 3px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .btn.primary { background: #003580; color: white; border: none; }
+        .btn:active { transform: scale(0.98); }
+
+        /* --- 6. ACCORDION ITINERARY --- */
+        details {
+            background: #fdfdfd;
+            border: 1px solid #edf2f7;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
-        th {
-            background-color: #3498db;
-            color: white;
+
+        summary {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            list-style: none;
         }
+
+        summary::after { content: '＋'; color: #e67e22; }
+        details[open] summary::after { content: '－'; }
+
+        .details-content { padding: 0 15px 15px 15px; font-size: 0.85rem; color: #4a5568; }
+
+        .info-links { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .info-links a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+            background: #f0f7ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        footer { text-align: center; color: #95a5a6; font-size: 0.75rem; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <img 
-            src="./images/Carnival_Splendor.jpg" 
-            alt="Carnival Splendor Cruise Ship" 
-            class="ship-image"
-        >
-        <div class="header-text">
-            <h1>Christine & Daryl: Complete Itinerary</h1>
-            <p>Carnival Australia & New Zealand</p>
+
+    <header>
+        <div class="hero-container">
+            <img src="./images/Carnival_Splendor.jpg" alt="Cruise Ship" class="hero-img">
+        </div>
+        <h1>Christine & Daryl to Australia/New Zealand</h1>
+        <p>Our Itinerary</p>
+    </header>
+
+    <div class="countdown-wrap">
+        <div class="countdown-card">
+            <p class="countdown-label">Days Until Departure</p>
+            <div id="timer">
+                <div class="time-segment"><span class="time-num" id="days">00</span><span class="label">Days</span></div>
+                <div class="time-segment"><span class="time-num" id="hours">00</span><span class="label">Hours</span></div>
+                <div class="time-segment"><span class="time-num" id="mins">00</span><span class="label">Mins</span></div>
+            </div>
         </div>
     </div>
-	<main>
-        <section id="overview" class="section">
-            <h2>Trip Overview</h2>
-            <p>Dates: March 19th - April 3rd, 2026</p>
-            <p>Destinations: Ottawa → Sydney → New Zealand → Sydney → Ottawa</p><br>
-			<script src="https://cdn.logwork.com/widget/digital.js"></script>
-			<a href="https://logwork.com/current-time-in-sydney-australia-new-south-wales" class="digital-clock" data-style="electronic" data-size="284" data-timezone="Australia/Sydney" data-language="en" data-format="12" data-date="1">Sydney,  Australia</a>
-			<p><A HREF="Splendor-Countdown.html">Countdown</A> </p>
-			<p><A HREF="https://photos.google.com/share/AF1QipO_30wQxobuFw7fLbg-X5qRJEwoCky7OEGRC30d5dVUj4gn1EtksmPP7ocw-yKbsw">Photo Album</A> </p>
+	
+    
+</div>
+    <main class="container">
+        <section class="card">
+		<div class="time-card">
+            <span class="location-label">Local Time in Sydney</span>
+            <h2 id="sydney-time">00:00:00</h2>
+            <p id="sydney-date">Loading date...</p>
+		</div>
+		</section>
+
+        
+    </div>
+		<section class="card">
+            <h2>Links</h2>
+            <div class="btn-stack">
+                <a href="Splendor-Countdown.html" class="btn" target="_blank">Cruise Countdown</a>
+                <a href="https://www.cruisemapper.com/?imo=9333163" class="btn" target="_blank">Ship Location</a>
+                <a href="https://www.cruisetimetables.com/portloadscarnivalsplendor-23mar2026-02apr2026.html" class="btn">Ships in Port</a>
+				<a href="./images/splendor_itinerary.jpg" target="_blank"><br>
+						<img src="./images/splendor_itinerary.jpg" alt="Thumbnail" style="width: auto; height: auto; max-width: 200px;">
+            </div>
         </section>
 
-        <section id="detailed-itinerary" class="section">
-            <h2>Detailed Itinerary</h2>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Activity/Location (click for weather)</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>March 19th, 2026</td>
-                    <td>Outbound Flight</td>
-                    <td>
-                        Leg #1<br>
-						Air Canada - <a href="https://www.flightaware.com/live/flight/ACA345"> AC 345</a><br>
-                        Ottawa (YOW) to Vancouver (YVR)<br>
-                        YOW Departure: 5:50PM<br>
-                        YVR Arrival: 8:00PM<br>
-						Leg #2<br>
-						Air Canada - <a href="https://www.flightaware.com/live/flight/ACA33"> AC 33</a><br>
-                        Vancouver (YVR) to Sydney (SYD)<br>
-                        YVR Departure: 10:40PM<br>
-                        SYD Arrival: 8:35am (March 21)<br>
-						
-                    </td>
-                </tr>
-				<tr>
-                    <td>March 21st, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney">Sydney, Australia </a></td>
-                    <td>
-                     <a href="https://maps.app.goo.gl/Uy7MYtoJEv9Wz2nM7">Hotel - YHA Sydney Harbour</a><br>
-					 <a href="https://www.youtube.com/watch?v=5uZa3-RMFos">Sydney Harbour Webcam</a><br>
-					 <a href="https://www.thesebelquaywestsydney.com.au/live-webcam">Sydney Harbour Webcam - alternate</a><br>
-					 
-                    </td>
-                </tr>
-				<tr>
-                    <td>March 22nd, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney">Sydney, Australia </a></td>
-                    <td>
-                     <a href="https://maps.app.goo.gl/Uy7MYtoJEv9Wz2nM7">Hotel - YHA Sydney Harbour</a><br>
-					 <a href="https://www.youtube.com/watch?v=5uZa3-RMFos">Sydney Harbour Webcam</a><br>
-					 <a href="https://www.thesebelquaywestsydney.com.au/live-webcam">Sydney Harbour Webcam - alternate</a><br>
-                    </td>
-                </tr>
-				<tr>
-                    <td>March 23rd, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney">Sydney, Australia </a></td>
-                    <td>
-                        Carnival Splendor<br>
-                        Port of Sydney<br>
-                        Departure: 4:00 PM<br>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>
-						<a href="https://www.cruisetimetables.com/portloadscarnivalsplendor-23mar2026-02apr2026.html">Ships in port</a>
-						<a href="./images/splendor_itinerary.jpg" target="_blank"><br>
-						<img src="./images/splendor_itinerary.jpg" alt="Thumbnail" style="width: 100%; height: auto; max-width: 100px;"></td>
-						</a>
-                    </td>
-                </tr>
-				<tr>
-                    <td>March 24th, 2026</td>
-                    <td>Sea Day </td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>					
-                    </td>
-                </tr>
-                <tr>
-                    <td>March 25th, 2026</td>
-                    <td>Sea Day </td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>					
-                    </td>
-                </tr>
-                <tr>
-                    <td>March 26th, 2026</td>
-                    <td>Sea Day </td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>					
-                    </td>
-                </tr>
-                <tr>
-                    <td>March 27th, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/nz/napier/248572/weather-forecast/248572">Napier, NZ </a></td>
-                    <td>Arrival: 7:00 AM<br>Departure: 3:00 PM<br>
-                </tr>
-                <tr>
-                    <td>March 28th, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/nz/tauranga/246959/weather-forecast/246959">Tauranga, NZ </a></td>
-                    <td>Arrival: 10:00 AM<br>Departure: 9:00 PM<br>
-                </tr>
-                <tr>
-                    <td>March 29th, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/nz/auckland/252066/weather-forecast/252066">Auckland, NZ </a></td>
-                    <td>Arrival: 8:00 AM<br>Departure: 6:00 PM<br></td>
-                </tr>
-				<tr>
-                    <td>March 30th, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/nz/russell/249809/weather-forecast/249809">Bay of Isles, NZ </a></td>
-                    <td>Arrival: 7:00 AM<br>Departure: 4:00 PM<br>
-                </tr>
-				<tr>
-                    <td>March 31st, 2026</td>
-                    <td>Sea Day </td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>					
-                    </td>
-                </tr>
-                <tr>
-                    <td>April 1st, 2026</td>
-                    <td>Sea Day </td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>					
-                    </td>
-                </tr>
-                <tr>
-                    <td>April 2nd, 2026</td>
-                    <td><a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney">Sydney, Australia </a></td>
-                    <td>
-						<a href="https://www.cruisemapper.com/?imo=9333163">Ship Location</a><br>	
+        <section class="card">
+            <h2>Our Itinerary</h2>
+            
+            <details>
+                <summary>March 19th: Ottawa to Vancouver</summary>
+                <div class="details-content">
+                    <p> YOW Departure: 5:50PM<br>
+                        YVR Arrival: 8:00PM</p>
+                    <div class="info-links">
+                        <a href="https://www.flightaware.com/live/flight/ACA345" target="_blank">YOW - YVR AC345</a>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>March 19th-21st: Vancouver to Sydney</summary>
+                <div class="details-content">
+                    <p> YVR Departure: 10:40PM<br>
+                        SYD Arrival: 8:35am </p>
+                    <div class="info-links">
+                        <a href="https://www.flightaware.com/live/flight/ACA33" target="_blank">YVR - SYD AC33</a>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary>March 21st-23rd: Sydney</summary>
+                <div class="details-content">
+                    <p> Sightseeing</p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney" target="_blank">Sydney Weather</a>
 						<a href="https://maps.app.goo.gl/Uy7MYtoJEv9Wz2nM7">Hotel - YHA Sydney Harbour</a><br>
-                    </td>
-                </tr>
-				<tr>
-                    <td>April 3rd, 2026</td>
-                    <td>Return Flight</a></td>
-                    <td>
-						Leg #1<br>
-						Air Canada - <a href="https://www.flightaware.com/live/flight/ACA34"> AC 34</a><br>
-                        Sydney (SYD) to Vancouver (YVR)<br>
-                        SYD Departure: 10:20AM<br>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 23rd: Cruise Embark</summary>
+                <div class="details-content">
+                    <p> Carnival Splendor<br>
+                        Port of Sydney<br>
+                        Departure: 4:00 PM  </p>
+                    <div class="info-links">
+						<a href="https://www.youtube.com/watch?v=5uZa3-RMFos">Sydney Harbour Webcam</a><br>
+						<a href="https://www.thesebelquaywestsydney.com.au/live-webcam">Sydney Harbour Webcam - alternate</a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 24th-26th: At Sea</summary>
+                <div class="details-content">
+                    <p>  </p>
+                    <div class="info-links">
+                        <a href="https://www.cruisemapper.com/?imo=9333163" class="btn" target="_blank">Ship Location</a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 27th: Napier, NZ</summary>
+                <div class="details-content">
+                    <p> Arrival: 7:00 AM<br>Departure: 3:00 PM </p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/nz/napier/248572/weather-forecast/248572">Napier Weather </a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 28th: Tauranga, NZ</summary>
+                <div class="details-content">
+                    <p> Arrival: 10:00 AM<br>Departure: 9:00 PM </p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/nz/tauranga/246959/weather-forecast/246959">Tauranga Weather </a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 29th: Auckland, NZ</summary>
+                <div class="details-content">
+                    <p> Arrival: 8:00 AM<br>Departure: 6:00 PM </p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/nz/auckland/252066/weather-forecast/252066">Auckland Weather </a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 30th: Bay of Isles, NZ</summary>
+                <div class="details-content">
+                    <p> Arrival: 7:00 AM<br>Departure: 4:00 PM </p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/nz/russell/249809/weather-forecast/249809">Bay of Isles Weather </a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>March 31st-April 1st: At Sea</summary>
+                <div class="details-content">
+                    <p>  </p>
+                    <div class="info-links">
+                        <a href="https://www.cruisemapper.com/?imo=9333163" class="btn" target="_blank">Ship Location</a>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>April 2nd: Sydney</summary>
+                <div class="details-content">
+                    <p> Sightseeing</p>
+                    <div class="info-links">
+                        <a href="https://www.accuweather.com/en/au/sydney/22889/weather-forecast/22889?city=sydney" target="_blank">Sydney Weather</a>
+						<a href="https://maps.app.goo.gl/Uy7MYtoJEv9Wz2nM7">Hotel - YHA Sydney Harbour</a><br>
+                    </div>
+                </div>
+            </details>
+			<details>
+                <summary>April 3rd: Sydney to Ottawa</summary>
+                <div class="details-content">
+                    <p> SYD Departure: 10:20AM<br>
                         YVR Arrival: 6:50AM<br>
-						Leg #2<br>
-						Air Canada - <a href="https://www.flightaware.com/live/flight/ACA342"> AC 342</a><br>
-                        Vancouver (YVR) to Ottawa (YOW)<br>
-                        YVR Departure: 8:15AM<br>
-                        YOW Arrival: 3:50PM <br>
-                     </td>
-                </tr>
-            </table>
+						YVR Departure: 8:15AM<br>
+                        YOW Arrival: 3:50PM</p>
+                    <div class="info-links">
+                        <a href="https://www.flightaware.com/live/flight/ACA34" target="_blank">SYD - YVR AC34</a>
+						<a href="https://www.flightaware.com/live/flight/ACA342" target="_blank">YVR - YOW AC342</a>
+                    </div>
+                </div>
+            </details>
+			
+			
         </section>
-
-        <section id="contact-info" class="section">
-            <h2>Contact Information on trip</h2>
-            <ul>
-                <li>Daryl Mobile  <a href="tel:6138580084">(613)858-0084</a></li>
-                <li>Christine Mobile  <a href="tel:6138980151">(613)898-0151</a></li>
-				<p><br></p>
-                <p><b>Kids contact numbers:</b></p>
-				<li>Leah at Guelph  <a href="tel:3432622176">(343)262-2176</a></li>
-				<li>Keelan <a href="tel:3432022187">(343)202-2187</a></li>
-				<li>Tori <a href="tel:6135812176">(613)581-2176</a></li>
-				<li>Home phone  <a href="tel:6132889187">(613)288-9187</a></li>
-            </ul>
-        </section>
-		<section id="contact-info" class="section">
-            <h2>Future Cruises</h2>
-            <ul>
-                
-				<p><br></p>
-            </ul>
-			<h2>Previous Cruises</h2>
-            <ul>
-				<li>NCL Aqua - January 2026 - <a href="index-aqua-2026.html">Itinerary</a></li>
+		<section class="card">
+            <h2>Previous Cruises</h2>
+            <div class="btn-stack">
+                <li>NCL Aqua - January 2026 - <a href="index-aqua-2026.html">Itinerary</a></li>
 				<li>Carnival Miracle - September 2025 - <a href="index-miracle-2025.html">Itinerary</a></li>
                 <li>Carnival Horizon - May 2025 - <a href="index-horizon-2025.html">Itinerary</a></li>
                 <li>NCL Encore - February 2025 -  <a href="index-encore-2025.html">Itinerary</a></li>
-				<p><br></p>
-            </ul>
-        </section>
+            </div>
+    </section>
     </main>
+	
 
     <footer>
-        <p></p>
-        <p></p>
+        <p>&copy; Christine & Daryl to Australia/New Zealand</p>
     </footer>
+
+    <script>
+        // Update this to your exact sailing date
+        const targetDate = new Date("March 19, 2026 12:00:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById("days").innerText = d;
+                document.getElementById("hours").innerText = h;
+                document.getElementById("mins").innerText = m;
+            } else {
+                document.querySelector(".countdown-card").innerHTML = "<h3>Bon Voyage! 🚢</h3>";
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+		
+		function updateSydneyTime() {
+		const now = new Date();
+
+		// Short Time Format: "5:30:01 PM"
+		const timeOptions = { 
+			timeZone: 'Australia/Sydney', 
+			hour: 'numeric', 
+			minute: '2-digit', 
+			second: '2-digit', 
+			hour12: true 
+		};
+
+		// Short Date Format: "Sun, Mar 1, 2026"
+		const dateOptions = { 
+			timeZone: 'Australia/Sydney', 
+			weekday: 'short', 
+			day: 'numeric', 
+			month: 'short', 
+			year: 'numeric' 
+		};
+
+		// Using 'en-US' or 'en-GB' for standard English formatting
+		const timeString = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+		const dateString = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+
+		document.getElementById('sydney-time').innerText = timeString;
+		document.getElementById('sydney-date').innerText = dateString;
+	}
+
+		// Run the clock every second
+		setInterval(updateSydneyTime, 1000);
+		updateSydneyTime();
+    </script>
 </body>
 </html>
