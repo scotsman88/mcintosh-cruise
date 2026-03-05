@@ -260,3 +260,80 @@ details[open] summary::after {
     opacity: 0.8;
 	text-align: center;
 }
+
+/* --- Expanded WhatsApp Buttons --- */
+.whatsapp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Increased gap for better separation */
+}
+
+.wa-btn {
+    display: block;
+    background: #ffffff;
+    border: 2px solid #e9ecef; /* Slightly thicker border */
+    padding: 18px 20px; /* Larger hit area for thumbs */
+    border-radius: 16px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+.wa-content {
+    display: flex;
+    align-items: center;
+}
+
+.wa-btn:active {
+    background: #f0fdf4;
+    border-color: #25D366;
+    transform: translateY(2px); /* Slight press-down effect */
+}
+
+.wa-icon {
+    font-size: 1.4rem;
+    background: #25D366;
+    color: white;
+    width: 48px; /* Slightly larger icon circle */
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevents icon from squishing */
+}
+
+.wa-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.wa-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2b3c;
+    margin-bottom: 2px;
+}
+
+.wa-tag {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6c757d;
+    background: #f8f9fa; /* Small subtle background for the label */
+    padding: 2px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* Tablet/Desktop: Side-by-Side */
+@media (min-width: 600px) {
+    .whatsapp-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .wa-btn {
+        flex: 1 1 calc(33.33% - 10px);
+    }
+}
