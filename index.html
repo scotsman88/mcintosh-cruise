@@ -137,6 +137,63 @@
         }
 
         footer { text-align: center; color: #95a5a6; font-size: 0.75rem; margin-top: 20px; }
+		/* --- BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; padding-bottom: 50px; }
+        .container { width: 92%; max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* --- THE ITINERARY ITEMS --- */
+        details.itinerary-item {
+            background: #ffffff;
+            border: 1px solid #edf2f7;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            display: block;
+        }
+
+        summary {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            list-style: none;
+        }
+
+        /* --- THE HIGHLIGHT (TODAY) --- */
+        /* We use the full path to ensure it overrides everything */
+        html body details.itinerary-item.today-highlight {
+            border: 3px solid #f1c40f !important;
+            background-color: #fffde7 !important;
+            box-shadow: 0 0 20px 5px rgba(241, 196, 15, 0.4) !important;
+            position: relative;
+            z-index: 99;
+        }
+
+        /* The Yellow Badge */
+        html body details.itinerary-item.today-highlight summary::before {
+            content: "TODAY";
+            display: inline-block;
+            background-color: #f1c40f !important;
+            color: #000 !important;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 12px;
+            line-height: 1;
+        }
+
+        /* Ensure the summary background matches when open */
+        html body details.itinerary-item.today-highlight[open] summary {
+            background-color: #fffde7 !important;
+        }
+
+        .details-content { padding: 15px; border-top: 1px solid #f7fafc; }
+        .thumb-img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -186,7 +243,8 @@
 	</div>
         <section class="card">
             <h2>Our Itinerary</h2>
-            <details>
+            
+			<details class="itinerary-item" data-date="2026-03-19">
                 <summary>March 19th: Ottawa to Vancouver</summary>
                 <div class="details-content">
                     <p> YOW Departure: 5:50PM<br>
@@ -196,7 +254,7 @@
                     </div>
                 </div>
             </details>
-            <details>
+            <details class="itinerary-item" data-date="2026-03-20">
                 <summary>March 19th-21st: Vancouver to Sydney</summary>
                 <div class="details-content">
                     <p> YVR Departure: 10:40PM<br>
@@ -206,7 +264,7 @@
                     </div>
                 </div>
             </details>
-            <details>
+            <details class="itinerary-item" data-date="2026-03-21,2026-03-22">
                 <summary>March 21st-23rd: Sydney</summary>
                 <div class="details-content">
                     <p> Sightseeing<br>
@@ -217,7 +275,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-23">
                 <summary>March 23rd: Cruise Embark</summary>
                 <div class="details-content">
                     <p> Port of Sydney - Carnival Splendor<br>
@@ -229,7 +287,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-24,2026-03-25,2026-03-26">
                 <summary>March 24th-26th: At Sea</summary>
                 <div class="details-content">
                     <p>  </p>
@@ -238,7 +296,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-27">
                 <summary>March 27th: Napier, NZ</summary>
                 <div class="details-content">
                     <p> Arrival: 7:00 AM<br>Departure: 3:00 PM </p>
@@ -247,7 +305,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-28">
                 <summary>March 28th: Tauranga, NZ</summary>
                 <div class="details-content">
                     <p> Arrival: 10:00 AM<br>Departure: 9:00 PM<br>
@@ -257,7 +315,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-29">
                 <summary>March 29th: Auckland, NZ</summary>
                 <div class="details-content">
                     <p> Arrival: 8:00 AM<br>
@@ -269,7 +327,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-30">
                 <summary>March 30th: Bay of Isles, NZ</summary>
                 <div class="details-content">
                     <p> Arrival: 7:00 AM<br>Departure: 4:00 PM </p>
@@ -278,7 +336,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-03-31,2026-04-01">
                 <summary>March 31st-April 1st: At Sea</summary>
                 <div class="details-content">
                     <p>  </p>
@@ -287,7 +345,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-04-02">
                 <summary>April 2nd: Sydney</summary>
                 <div class="details-content">
                     <p>Sightseeing</p>
@@ -297,7 +355,7 @@
                     </div>
                 </div>
             </details>
-			<details>
+			<details class="itinerary-item" data-date="2026-04-03,2026-04-04">
                 <summary>April 3rd: Sydney to Ottawa</summary>
                 <div class="details-content">
                     <p> SYD Departure: 10:20AM<br>
@@ -366,62 +424,66 @@
         <p>&copy; Christine & Daryl to Australia/New Zealand</p>
     </footer>
 
-    <script>
-        // Update this to your exact sailing date
-        const targetDate = new Date("March 19, 2026 12:00:00").getTime();
+ <script>
+function initializeDashboard() {
+    console.log("Dashboard Initializing...");
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
+    // 1. Get Current Sydney Date & Time
+    const now = new Date();
+    
+    // Format for Highlighting (YYYY-MM-DD)
+    const sydneyDateStr = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Australia/Sydney',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(now);
 
-            if (diff > 0) {
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    // Format for Clock (English Short)
+    const timeOptions = { timeZone: 'Australia/Sydney', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true };
+    const dateOptions = { timeZone: 'Australia/Sydney', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+    
+    const sydneyTime = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+    const sydneyDay = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
 
-                document.getElementById("days").innerText = d;
-                document.getElementById("hours").innerText = h;
-                document.getElementById("mins").innerText = m;
-            } else {
-                document.querySelector(".countdown-card").innerHTML = "<h3>Bon Voyage! 🚢</h3>";
+    // 2. Update the UI Clocks
+    if(document.getElementById('sydney-time')) {
+        document.getElementById('sydney-time').innerText = sydneyTime;
+        document.getElementById('sydney-date').innerText = sydneyDay;
+    }
+
+    // 3. Multi-Date Highlighting Logic
+    const items = document.querySelectorAll('.itinerary-item');
+    items.forEach(item => {
+        const dateAttr = item.getAttribute('data-date');
+        if (dateAttr) {
+            const dateList = dateAttr.split(',').map(d => d.trim()); // Trim whitespace
+            if (dateList.includes(sydneyDateStr)) {
+                item.classList.add('today-highlight');
+                item.setAttribute('open', 'true');
+                console.log("Highlighted Date: " + sydneyDateStr);
             }
         }
+    });
 
-        setInterval(updateTimer, 1000);
-        updateTimer();
-		
-		function updateSydneyTime() {
-		const now = new Date();
+    // 4. Cruise Countdown Logic
+    const targetDate = new Date("Mar 19, 2026 12:00:00").getTime();
+    const diff = targetDate - now.getTime();
+    if (diff > 0 && document.getElementById("days")) {
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    }
+}
 
-		// Short Time Format: "5:30:01 PM"
-		const timeOptions = { 
-			timeZone: 'Australia/Sydney', 
-			hour: 'numeric', 
-			minute: '2-digit', 
-			second: '2-digit', 
-			hour12: true 
-		};
+// THE FIX: This ensures the script waits for the HTML to be ready
+window.addEventListener('DOMContentLoaded', () => {
+    initializeDashboard();
+    // Refresh the clock and countdown every second
+    setInterval(initializeDashboard, 1000);
+});
+</script>
+	
 
-		// Short Date Format: "Sun, Mar 1, 2026"
-		const dateOptions = { 
-			timeZone: 'Australia/Sydney', 
-			weekday: 'short', 
-			day: 'numeric', 
-			month: 'short', 
-			year: 'numeric' 
-		};
 
-		// Using 'en-US' or 'en-GB' for standard English formatting
-		const timeString = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
-		const dateString = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
 
-		document.getElementById('sydney-time').innerText = timeString;
-		document.getElementById('sydney-date').innerText = dateString;
-	}
-
-		// Run the clock every second
-		setInterval(updateSydneyTime, 1000);
-		updateSydneyTime();
-    </script>
 </body>
 </html>
