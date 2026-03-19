@@ -222,10 +222,14 @@
     <main class="container">
 	
         <section class="card">
-		<div class="time-card">
-            <span class="location-label">Local Time in Sydney</span>
-            <h2 id="sydney-time">00:00:00</h2>
-            <p id="sydney-date">Loading date...</p>
+		<div class="container">
+			<div id="time-display-card" class="time-card">
+				<span class="location-label" id="location-label">Sydney, AUS 🇦🇺</span>
+        
+				<h2 id="clock-time">00:00:00</h2>
+        
+				<p id="clock-date">Loading...</p>
+			</div>
 		</div>
 		</section>
 
@@ -425,54 +429,92 @@
     </footer>
 
  <script>
-function initializeDashboard() {
-    console.log("Dashboard Initializing...");
-
-    // 1. Get Current Sydney Date & Time
+function updateDashboard() {
     const now = new Date();
     
-    // Format for Highlighting (YYYY-MM-DD)
+    // --- 1. DATE RANGE LOGIC ---
+    // JavaScript months: 0=Jan, 1=Feb, 2=March
+    const isMarch = now.getMonth() === 2;
+    const day = now.getDate();
+    
+    let timeZone = 'Australia/Sydney';
+    let labelText = 'Current Time in Sydney, AU';
+    let isNZMode = false;
+
+    // Check if between March 26th and March 31st
+    if (isMarch && day >= 26 && day <= 31) {
+        timeZone = 'Pacific/Auckland';
+        labelText = 'Current Time in New Zealand';
+        isNZMode = true;
+    }
+
+    // --- 2. FORMATTING ---
+    const timeOptions = { 
+        timeZone: timeZone, 
+        hour: 'numeric', minute: '2-digit', second: '2-digit', 
+        hour12: true 
+    };
+    const dateOptions = { 
+        timeZone: timeZone, 
+        weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' 
+    };
+
+    const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+    const dateStr = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+
+    // --- 3. UPDATE THE UI ---
+    const labelEl = document.getElementById('location-label');
+    const timeEl = document.getElementById('clock-time');
+    const dateEl = document.getElementById('clock-date');
+    const cardEl = document.getElementById('time-display-card');
+
+    if (labelEl) labelEl.innerText = labelText;
+    if (timeEl) timeEl.innerText = timeStr;
+    if (dateEl) dateEl.innerText = dateStr;
+
+    // Optional: Visual cue when in NZ mode (Change border color)
+    if (isNZMode && cardEl) {
+        cardEl.style.borderColor = "#0056b3"; // NZ Blue accent
+    }
+
+    // --- 4. ITINERARY HIGHLIGHTING ---
+    // We keep the highlighting logic tied to the local date of the user
     const sydneyDateStr = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Australia/Sydney',
+        timeZone: timeZone, // Card highlights based on the active timezone
         year: 'numeric', month: '2-digit', day: '2-digit'
     }).format(now);
 
-    // Format for Clock (English Short)
-    const timeOptions = { timeZone: 'Australia/Sydney', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true };
-    const dateOptions = { timeZone: 'Australia/Sydney', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-    
-    const sydneyTime = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
-    const sydneyDay = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
-
-    // 2. Update the UI Clocks
-    if(document.getElementById('sydney-time')) {
-        document.getElementById('sydney-time').innerText = sydneyTime;
-        document.getElementById('sydney-date').innerText = sydneyDay;
-    }
-
-    // 3. Multi-Date Highlighting Logic
     const items = document.querySelectorAll('.itinerary-item');
     items.forEach(item => {
         const dateAttr = item.getAttribute('data-date');
         if (dateAttr) {
-            const dateList = dateAttr.split(',').map(d => d.trim()); // Trim whitespace
+            const dateList = dateAttr.split(',').map(d => d.trim());
             if (dateList.includes(sydneyDateStr)) {
                 item.classList.add('today-highlight');
                 item.setAttribute('open', 'true');
-                console.log("Highlighted Date: " + sydneyDateStr);
+            } else {
+                // Remove highlight if it's a different day
+                item.classList.remove('today-highlight');
             }
         }
     });
 
-    // 4. Cruise Countdown Logic
-    const targetDate = new Date("Mar 19, 2026 12:00:00").getTime();
-    const diff = targetDate - now.getTime();
+    // --- 5. CRUISE COUNTDOWN ---
+    const target = new Date("March 19, 2026 17:50:00").getTime();
+    const diff = target - now.getTime();
     if (diff > 0 && document.getElementById("days")) {
         document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
         document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     }
 }
+
+// Start the dashboard
+window.addEventListener('DOMContentLoaded', () => {
+    updateDashboard();
+    setInterval(updateDashboard, 1000);
+});
+</script>
 
 // THE FIX: This ensures the script waits for the HTML to be ready
 window.addEventListener('DOMContentLoaded', () => {
