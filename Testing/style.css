@@ -1,0 +1,262 @@
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding-bottom: 40px;
+}
+
+/* --- Header & Hero Section --- */
+header {
+    background: linear-gradient(135deg, #003580 0%, #0056b3 100%);
+    color: white;
+    padding: 30px 20px 80px 20px; /* Extra bottom padding to accommodate countdown overlap */
+    text-align: center;
+}
+
+.hero-container {
+    max-width: 500px;
+    margin: 0 auto 15px auto;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* --- Countdown Card (The Overlap) --- */
+.countdown-wrap {
+    max-width: 400px;
+    margin: -50px auto 30px auto; /* This creates the floating effect */
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.countdown-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.countdown-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#timer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.time-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e67e22; /* Vibrant orange for excitement */
+    line-height: 1;
+}
+
+.label {
+    font-size: 0.6rem;
+    color: #95a5a6;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* --- Content Layout --- */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+h2 {
+    font-size: 1.1rem;
+    color: #003580;
+    margin-bottom: 15px;
+    border-left: 4px solid #e67e22;
+    padding-left: 10px;
+}
+
+/* --- Buttons --- */
+.btn-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    background: #f8f9fa;
+    color: #0056b3;
+    border: 1px solid #dee2e6;
+}
+
+.btn.primary {
+    background: #003580;
+    color: white;
+    border: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* --- Itinerary List --- */
+.itinerary-list .item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 0.9rem;
+}
+
+.itinerary-list .item:last-child {
+    border-bottom: none;
+}
+
+footer {
+    text-align: center;
+    color: #95a5a6;
+    font-size: 0.8rem;
+    margin-top: 20px;
+}
+/* --- Accordion / Dropdown Styling --- */
+details {
+    background: #fdfdfd;
+    border: 1px solid #edf2f7;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+details[open] {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+summary {
+    padding: 15px;
+    cursor: pointer;
+    list-style: none; /* Removes default arrow on some browsers */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+/* Custom arrow for the dropdown */
+summary::after {
+    content: '＋';
+    color: #e67e22;
+    font-weight: bold;
+}
+
+details[open] summary::after {
+    content: '－';
+}
+
+.details-content {
+    padding: 0 15px 15px 15px;
+    font-size: 0.9rem;
+    color: #4a5568;
+    border-top: 1px solid #f7fafc;
+}
+
+.info-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.info-links a {
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: #f0f7ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.info-links a:hover {
+    background: #e1efff;
+}
+/* --- Sydney Time Card Styling --- */
+.time-card {
+    background: #1a2b3c; /* Dark navy for contrast */
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #bdc3c7;
+    display: block;
+    margin-bottom: 5px;
+	text-align: center;
+}
+
+#sydney-time {
+    font-size: 1.6rem;
+    color: #f1c40f; /* Yellow/Gold to stand out */
+    margin: 0;
+    text-align: center;
+	border: none;
+    padding: 0;
+}
+
+#sydney-date {
+    font-size: 0.8rem;
+    opacity: 0.8;
+	text-align: center;
+}
