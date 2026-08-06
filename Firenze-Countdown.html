@@ -10,7 +10,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
 			
-            background-image: url('./images/Firenze/Patagonia4.jpg'); /* Replace with your custom image URL */
+            
             background-size: 100% auto; /* Adjusts the width to 100% and height to auto */
             background-size: cover;
 			background-position: 35% center; /* Adjusts the position to 25% from the left */
@@ -32,16 +32,16 @@
 
         .countdown-container {
             position: absolute; /* Position at the top */
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
             color: #fff;
             background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            padding: 5px 10px; /* Reduced padding */
-            border-radius: 5px; /* Smaller border radius */
+            padding: 3px 8px; /* Reduced padding */
+            border-radius: 3px; /* Smaller border radius */
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Smaller box shadow */
-            font-size: 16px; /* Smaller font size */
+            font-size: 15px; /* Smaller font size */
         }
 
         .countdown {
@@ -56,7 +56,7 @@
 
         .countdown-element h2 {
             font-size: 18px; /* Smaller font size */
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         #expired {
@@ -78,7 +78,7 @@
 </head>
 <body>
     <div class="countdown-container">
-        <h1 style="font-size: 16px; margin-bottom: 5px;">Carnival Firenze - South America & End of the World</h1>
+        <h1 style="font-size: 15px; margin-bottom: 3px;">Carnival Firenze - South America & End of the World</h1>
         <div class="countdown">
             <div class="countdown-element">
                 <h2 id="days"></h2>
@@ -97,7 +97,18 @@
     </div>
 
     <script>
-        // Set the date we're counting down to
+		const images = [
+		'./images/Firenze/countdown/Patagonia1.jpg',
+		'./images/Firenze/countdown/Patagonia2.jpg',
+		'./images/Firenze/countdown/Patagonia3.jpg',
+		'./images/Firenze/countdown/Patagonia4.jpg',
+		'./images/Firenze/countdown/Patagonia5.jpg',
+		'./images/Firenze/countdown/Patagonia6.jpg'
+		 ];
+		  
+		const randomIndex = Math.floor(Math.random() * images.length);
+		document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+		// Set the date we're counting down to
         var countDownDate = new Date("January 19, 2027 12:00").getTime();
 
         // Update the count down every 1 second
