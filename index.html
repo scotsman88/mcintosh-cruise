@@ -200,7 +200,7 @@
 
     <header>
         <div class="hero-container">
-            <img src="./images/Firenze/Patagonia2.jpg" alt="Cruise Ship" class="hero-img">
+            <img id="random-hero" src="./images/Firenze/Patagonia2.jpg" alt="Cruise Ship" class="hero-img">
         </div>
         <h1>Christine & Daryl at the End of the World</h1>
         <p>Our Itinerary from Chile to Argentina</p>
@@ -437,71 +437,88 @@
     </footer>
 
  <script>
-function updateDashboard() {
-    const now = new Date();
+	
+	function updateDashboard() {
+		const now = new Date();
+	
+		// --- 1. CONFIGURATION ---
+		// Change this to any valid IANA timezone string you want to display
+		// Examples: 'America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney'
+		const TARGET_TIMEZONE = 'America/Santiago'; 
+	
+		// --- 2. FORMATTING ---
+		// Passing the TARGET_TIMEZONE here forces the clock to show that specific region's time
+		const timeOptions = { 
+			timeZone: TARGET_TIMEZONE,
+			hour: 'numeric', minute: '2-digit', second: '2-digit', 
+			hour12: true 
+		};
+		const dateOptions = { 
+			timeZone: TARGET_TIMEZONE,
+			weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' 
+		};
 
-    // --- 1. CONFIGURATION ---
-    // Change this to any valid IANA timezone string you want to display
-    // Examples: 'America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney'
-    const TARGET_TIMEZONE = 'America/Santiago'; 
+		const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+		const dateStr = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
 
-    // --- 2. FORMATTING ---
-    // Passing the TARGET_TIMEZONE here forces the clock to show that specific region's time
-    const timeOptions = { 
-        timeZone: TARGET_TIMEZONE,
-        hour: 'numeric', minute: '2-digit', second: '2-digit', 
-        hour12: true 
-    };
-    const dateOptions = { 
-        timeZone: TARGET_TIMEZONE,
-        weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' 
-    };
+		// --- 2. UPDATE THE UI ---
+		const timeEl = document.getElementById('clock-time');
+		const dateEl = document.getElementById('clock-date');
+	
+		if (timeEl) timeEl.innerText = timeStr;
+		if (dateEl) dateEl.innerText = dateStr;
+	
+		// --- 3. ITINERARY HIGHLIGHTING ---
+		const localDateStr = new Intl.DateTimeFormat('en-CA', {
+			year: 'numeric', month: '2-digit', day: '2-digit'
+		}).format(now);
 
-    const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
-    const dateStr = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
-
-    // --- 2. UPDATE THE UI ---
-    const timeEl = document.getElementById('clock-time');
-    const dateEl = document.getElementById('clock-date');
-
-    if (timeEl) timeEl.innerText = timeStr;
-    if (dateEl) dateEl.innerText = dateStr;
-
-    // --- 3. ITINERARY HIGHLIGHTING ---
-    const localDateStr = new Intl.DateTimeFormat('en-CA', {
-        year: 'numeric', month: '2-digit', day: '2-digit'
-    }).format(now);
-
-    const items = document.querySelectorAll('.itinerary-item');
-    items.forEach(item => {
-        const dateAttr = item.getAttribute('data-date');
-        if (dateAttr) {
-            const dateList = dateAttr.split(',').map(d => d.trim());
-            if (dateList.includes(localDateStr)) {
-                item.classList.add('today-highlight');
-                item.setAttribute('open', 'true');
-            } else {
-                item.classList.remove('today-highlight');
-            }
-        }
-    });
-
-    // --- 4. CRUISE COUNTDOWN ---
-    // Updated target date to January 19, 2027
-    const target = new Date("January 16, 2027 17:00:00").getTime();
-    const diff = target - now.getTime();
-    if (diff > 0 && document.getElementById("days")) {
-        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    }
-}
+		const items = document.querySelectorAll('.itinerary-item');
+		items.forEach(item => {
+			const dateAttr = item.getAttribute('data-date');
+			if (dateAttr) {
+				const dateList = dateAttr.split(',').map(d => d.trim());
+				if (dateList.includes(localDateStr)) {
+					item.classList.add('today-highlight');
+					item.setAttribute('open', 'true');
+				} else {
+					item.classList.remove('today-highlight');
+				}
+			}
+		});
+	
+		// --- 4. CRUISE COUNTDOWN ---
+		// Updated target date to January 19, 2027
+		const target = new Date("January 16, 2027 17:00:00").getTime();
+		const diff = target - now.getTime();
+		if (diff > 0 && document.getElementById("days")) {
+			document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+			document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+		}
+		
+	}
 
 // Start the dashboard
 window.addEventListener('DOMContentLoaded', () => {
     updateDashboard();
     setInterval(updateDashboard, 1000);
+	
+	  // Picks a random Patagonia photo once per page load
+    const heroEl = document.getElementById('random-hero');
+    if (heroEl) {
+        const images = [
+            './images/Firenze/Patagonia1.jpg',
+            './images/Firenze/Patagonia2.jpg',
+            './images/Firenze/Patagonia3.jpg',
+            './images/Firenze/Patagonia4.jpg',
+            './images/Firenze/Patagonia5.jpg'
+        ];
+        const randomIndex = Math.floor(Math.random() * images.length);
+        heroEl.src = images[randomIndex];
+    }
 });
+
 </script>
 
 
