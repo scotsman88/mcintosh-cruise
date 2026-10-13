@@ -224,12 +224,50 @@
         <section class="card">
 		<div class="container">
 			<div id="time-display-card" class="time-card">
-				<span class="location-label" id="location-label">Santiago,Chile</span>
+				<span class="location-label" id="location-label" style="font-weight: bold;">Santiago,Chile</span>
         
 				<h2 id="clock-time">00:00:00</h2>
         
 				<p id="clock-date">Loading...</p>
 			</div>
+			<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 16px 0;">
+			<div id="currency-card" class="currency-card">
+			
+			
+			<!-- Mobile-Friendly Flexbox Wrapper -->
+			<div id="currency-card" class="currency-card">
+			<!-- Main Section Header -->
+			<span class="currency-label" id="currency-label" style="display: block; margin-bottom: 16px; font-weight: bold;">Currency Exchange</span>
+			
+			<!-- Mobile-Friendly Row Wrapper -->
+			<div class="iframe-row" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+				
+				<!-- Iframe 1 Block -->
+				<div class="iframe-item" style="display: flex; flex-direction: column; align-items: center; flex: 0 1 250px;">
+					<span class="widget-sublabel" style="font-size: 14px; color: #475569; margin-bottom: 6px; font-weight: 500;">CHILE</span>
+					<iframe
+						src="https://widget.currency.wiki/v3/embed?style=compact&size=small&theme=auto&accent=475569&lang=en-US&from=CAD&to=CLP&amount=1&lock=0&flags=1&labels=0&swap=1&branding=1&brandinglink=1&symbol=1&format=auto&decimals=2&dropdown=top10&width=250&height=160"
+						width="250"
+						height="160"
+						frameborder="0"
+						style="border-radius: 12px; overflow: hidden;"
+					></iframe>
+				</div>
+
+				<!-- Duplicate Iframe 2 Block -->
+				<div class="iframe-item" style="display: flex; flex-direction: column; align-items: center; flex: 0 1 250px;">
+					<span class="widget-sublabel" style="font-size: 14px; color: #475569; margin-bottom: 6px; font-weight: 500;">ARGENTINA</span>
+					<iframe
+						src="https://widget.currency.wiki/v3/embed?style=compact&size=small&theme=auto&accent=475569&lang=en-US&from=CAD&to=ARS&amount=1&lock=0&flags=1&labels=0&swap=1&branding=1&brandinglink=1&symbol=1&format=auto&decimals=2&dropdown=top10&width=250&height=160"
+						width="250"
+						height="160"
+						frameborder="0"
+						style="border-radius: 12px; overflow: hidden;"
+					></iframe>
+				</div>
+
+			</div>
+		
 		</div>
 		</section>
 
@@ -283,7 +321,7 @@
                 <summary>January 19th,2027: San Antonio, Chile (Embarkation)</summary>
                 <div class="details-content">
                     <p> <br>
-					<a href="https://www.youtube.com/watch?v=3ZdsA4ucbDw">Harbor Webcam</a></p>
+					<a href="https://www.webcamhopper.com/map/5955.html">Harbor Webcam</a></p>
                     <div class="info-links">
                         <a href="https://www.accuweather.com/en/cl/san-antonio/56788/weather-forecast/56788">San Antonio Weather</a>
 						
@@ -308,7 +346,8 @@
 			<details class="itinerary-item" data-date="2027-01-26">
                 <summary>January 26th,2027: Ushuaia, Argentina</summary>
                 <div class="details-content">
-                    
+                     <p> <br>
+					<a href="https://www.skylinewebcams.com/en/webcam/argentina/tierra-del-fuego/ushuaia/ushuaia.html">Harbor Webcam</a></p>
                     <div class="info-links">
                         <a href="https://www.cruisemapper.com/?imo=9801691" class="btn" target="_blank">Ship Location</a>
 						<a href="https://www.accuweather.com/en/ar/ushuaia/6462/weather-forecast/6462">Ushuaia Weather</a>
